@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "build:container": "wrangler containers build -t moltbot-sandbox .",
     "clean": "pnpx rimraf dist .wrangler",
     "clean:all": "pnpm run clean && pnpm run clean:deps",
     "clean:deps": "pnpx rimraf -g node_modules **/node_modules",

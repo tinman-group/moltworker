@@ -18,7 +18,11 @@ RUN ARCH="$(dpkg --print-architecture)" \
     && npm --version
 
 # Install pnpm globally
-RUN npm install -g pnpm
+ENV PNPM_HOME="/root/pnpm"
+ENV PATH="$PATH:$PNPM_HOME"
+RUN npm install -g pnpm \
+    && mkdir -p "$PNPM_HOME" \
+    && pnpm setup | ENV="~/.bashrc" SHELL="$(which bash)"
 
 # Install OpenClaw (formerly clawdbot/moltbot)
 # Pin to specific version for reproducible builds
