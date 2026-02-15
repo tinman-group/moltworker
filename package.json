@@ -11,8 +11,10 @@
   },
   "scripts": {
     "build": "vite build",
+    "clean": "pnpx rimraf dist .wrangler",
+    "clean:all": "pnpm run clean && pnpm run clean:deps",
     "clean:deps": "pnpx rimraf -g node_modules **/node_modules",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "pnpm run build && wrangler deploy",
     "dev": "vite dev",
     "fmt": "prettier --write src/",
     "fmt:check": "prettier --check src/",

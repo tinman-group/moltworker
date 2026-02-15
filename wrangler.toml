@@ -27,7 +27,7 @@ fallthrough = false
 
 # Build command for vite
 [build]
-command = "npm run build"
+command = "pnpm run build"
 
 # Container configuration for the Moltbot sandbox
 [[containers]]
@@ -37,9 +37,7 @@ instance_type = "standard-1"
 max_instances = 1
 
 [durable_objects]
-bindings = [
-  { class_name = "Sandbox", name = "Sandbox" }
-]
+bindings = [{ class_name = "Sandbox", name = "Sandbox" }]
 
 [[migrations]]
 tag = "v1"
