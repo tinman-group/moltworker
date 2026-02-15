@@ -110,11 +110,15 @@ npm run deploy
 After deploying, open the Control UI with your token:
 
 ```
+https://moltbox.tinman.tools/?token=YOUR_GATEWAY_TOKEN
+```
+
+Or using the default workers.dev domain:
+```
 https://your-worker.workers.dev/?token=YOUR_GATEWAY_TOKEN
 ```
 
-Replace `your-worker` with your actual worker subdomain and `YOUR_GATEWAY_TOKEN`
-with the token you generated above.
+Replace `YOUR_GATEWAY_TOKEN` with the token you generated above.
 
 **Note:** The first request may take 1-2 minutes while the container starts.
 
@@ -190,8 +194,7 @@ If you prefer more control, you can manually create an Access application:
 1. Go to [Cloudflare Zero Trust Dashboard](https://one.dash.cloudflare.com/)
 2. Navigate to **Access** > **Applications**
 3. Create a new **Self-hosted** application
-4. Set the application domain to your Worker URL (e.g.,
-   `moltbot-sandbox.your-subdomain.workers.dev`)
+4. Set the application domain to your Worker URL (e.g., `moltbox.tinman.tools`)
 5. Add paths to protect: `/_admin/*`, `/api/*`, `/debug/*`
 6. Configure your desired identity providers (e.g., email OTP, Google, GitHub)
 7. Copy the **Application Audience (AUD)** tag and set the secrets as shown
@@ -227,8 +230,8 @@ A gateway token is required to access the Control UI when hosted remotely. Pass
 it as a query parameter:
 
 ```
-https://your-worker.workers.dev/?token=YOUR_TOKEN
-wss://your-worker.workers.dev/ws?token=YOUR_TOKEN
+https://moltbox.tinman.tools/?token=YOUR_TOKEN
+wss://moltbox.tinman.tools/ws?token=YOUR_TOKEN
 ```
 
 **Note:** Even with a valid token, new devices still require approval via the
@@ -378,7 +381,7 @@ npx wrangler secret put CDP_SECRET
 
 ```bash
 npx wrangler secret put WORKER_URL
-# Enter: https://your-worker.workers.dev
+# Enter: https://moltbox.tinman.tools
 ```
 
 3. Redeploy:
