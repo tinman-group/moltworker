@@ -60,3 +60,6 @@ test/e2e/.dev.vars
 
 # npm config
 .npmrc
+
+# rclone config (contains R2 credentials)
+rclone.conf

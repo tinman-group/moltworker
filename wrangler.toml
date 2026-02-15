@@ -2,10 +2,20 @@ name = "moltbot-sandbox"
 main = "src/index.ts"
 compatibility_date = "2025-05-06"
 compatibility_flags = ["nodejs_compat"]
-preview_urls = false
 
 # Custom domain configuration
 routes = [{ pattern = "moltbot.tinman.tools", custom_domain = true }]
+
+# Environment variables
+[vars]
+DEBUG_ROUTES = true
+CF_ACCESS_TEAM_DOMAIN = "tinman-group.cloudflareaccess.com"
+CF_ACCESS_AUD = "204c10491d79a48224f685f3e975dbf53545487401535646b63cb11b484a6705"
+CF_ACCOUNT_ID = "6719a8f7528223d45d56e2fab188b7b2"
+ANTHROPIC_API_KEY = "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"
+R2_ACCESS_KEY_ID = "9f2a62b2f49c67eabcb3c8dda5e5526a"
+R2_SECRET_ACCESS_KEY = "f2a251f739896ec6c10d45d4ca9361584a924ac8039fda7c973b15ac98415963"
+MOLTBOT_GATEWAY_TOKEN = "03dbc61a62639e7854e18f4af64dcd2f737a3d3d0b83c35254d4aa1765a1d6ea"
 
 [observability]
 enabled = true
@@ -56,11 +66,9 @@ bucket_name = "moltbot-data"
 [browser]
 binding = "BROWSER"
 
-# Note: CF_ACCOUNT_ID should be set via `wrangler secret put CF_ACCOUNT_ID`
-# Secrets to configure via `wrangler secret put`:
+# Additional secrets that can be configured via `wrangler secret put` or added to [vars]:
 #
-# AI Provider (at least one set required):
-# - ANTHROPIC_API_KEY: Direct Anthropic API key
+# AI Provider (alternative to ANTHROPIC_API_KEY set above):
 # - OPENAI_API_KEY: Direct OpenAI API key
 # - Cloudflare AI Gateway (alternative to direct keys):
 #   - CLOUDFLARE_AI_GATEWAY_API_KEY: API key for requests through the gateway
@@ -70,19 +78,13 @@ binding = "BROWSER"
 #   - AI_GATEWAY_API_KEY: API key
 #   - AI_GATEWAY_BASE_URL: Gateway endpoint URL
 #
-# Authentication:
-# - MOLTBOT_GATEWAY_TOKEN: Token to protect gateway access
-# - CF_ACCESS_TEAM_DOMAIN: Cloudflare Access team domain
-# - CF_ACCESS_AUD: Cloudflare Access application audience
-#
 # Chat channels (optional):
 # - TELEGRAM_BOT_TOKEN, DISCORD_BOT_TOKEN, SLACK_BOT_TOKEN, SLACK_APP_TOKEN
 #
 # Browser automation (optional):
 # - CDP_SECRET: Shared secret for /cdp endpoint authentication
-# - WORKER_URL: Public URL of the worker
+# - WORKER_URL: Public URL of the worker (e.g., https://moltbox.tinman.tools)
 #
-# R2 persistent storage (optional, for data persistence across sessions):
-# - R2_ACCESS_KEY_ID: R2 access key ID (from R2 API tokens)
-# - R2_SECRET_ACCESS_KEY: R2 secret access key (from R2 API tokens)
-# - CF_ACCOUNT_ID: Your Cloudflare account ID (for R2 endpoint URL)
+# Note: The following are already set in [vars] above:
+# - ANTHROPIC_API_KEY, MOLTBOT_GATEWAY_TOKEN, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY
+# - CF_ACCESS_TEAM_DOMAIN, CF_ACCESS_AUD, CF_ACCOUNT_ID, DEBUG_ROUTES
