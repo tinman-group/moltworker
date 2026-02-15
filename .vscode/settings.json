@@ -1,0 +1,47 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
+  "editor.tabSize": 2,
+  "editor.stickyTabStops": true,
+  "editor.rulers": [80],
+  "editor.wrappingIndent": "indent",
+  "editor.detectIndentation": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  },
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.branches": true,
+    "**/.temp": true,
+    "**/node_modules": true,
+    "**/.vite": true,
+    "**/.wrangler": true,
+    "**/dist": true,
+    "**/.turbo": true,
+    "**/.next": true,
+    "**/.vercel": true,
+    "**/.husky": true,
+    "**/.open-next": true,
+    "**/tsconfig.buildinfo": true
+  },
+
+  "files.associations": {
+    "**/*.css": "tailwindcss",
+    "**/*.mdc": "markdown"
+  },
+
+  "explorer.fileNesting.enabled": false,
+  "outline.icons": true,
+  "gitlens.views.launchpad.files.icon": "type",
+  "breadcrumbs.icons": true,
+  "workbench.editor.showIcons": true,
+  "claudeCode.useCtrlEnterToSend": true
+}
