@@ -310,6 +310,16 @@ if r2_configured; then
 fi
 
 # ============================================================
+# START SSH SERVER
+# ============================================================
+echo "Starting SSH server..."
+# Generate host keys if they don't exist
+ssh-keygen -A 2>/dev/null || true
+# Start SSH service
+/usr/sbin/sshd
+echo "SSH server started on port 22"
+
+# ============================================================
 # START GATEWAY
 # ============================================================
 echo "Starting OpenClaw Gateway..."

@@ -63,3 +63,6 @@ test/e2e/.dev.vars
 
 # rclone config (contains R2 credentials)
 rclone.conf
+
+# SSH keys (contains public keys for remote access)
+authorized_keys

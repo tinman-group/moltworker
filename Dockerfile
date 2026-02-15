@@ -10,7 +10,7 @@ RUN ARCH="$(dpkg --print-architecture)" \
          arm64) NODE_ARCH="arm64" ;; \
          *) echo "Unsupported architecture: ${ARCH}" >&2; exit 1 ;; \
        esac \
-    && apt-get update && apt-get install -y xz-utils ca-certificates rclone \
+    && apt-get update && apt-get install -y xz-utils ca-certificates rclone openssh-server \
     && curl -fsSLk https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.xz -o /tmp/node.tar.xz \
     && tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 \
     && rm /tmp/node.tar.xz \
@@ -29,6 +29,21 @@ RUN npm install -g pnpm \
 RUN pnpm install -g openclaw@2026.2.14 \
     && openclaw --version
 
+# Configure SSH
+# Create SSH directory and configure sshd
+RUN mkdir -p /var/run/sshd /root/.ssh \
+    && chmod 700 /root/.ssh \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config \
+    && sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config \
+    && echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config \
+    && echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config
+
+# Copy authorized_keys for SSH key authentication
+# Create an 'authorized_keys' file in the repo root with your public SSH key
+# Use a wildcard pattern to make it optional
+COPY --chmod=600 authorized_keys* /root/.ssh/
+
 # Create OpenClaw directories
 # Legacy .clawdbot paths are kept for R2 backup migration
 RUN mkdir -p /root/.openclaw \
@@ -46,5 +61,5 @@ COPY skills/ /root/clawd/skills/
 # Set working directory
 WORKDIR /root/clawd
 
-# Expose the gateway port
-EXPOSE 18789
+# Expose the gateway port and SSH port
+EXPOSE 18789 22
